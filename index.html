@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Ipê Vendas</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <header>
+
+    <h1>
+      Ipê Material de Construção
+    </h1>
+
+    <p>
+      Sistema de Vendas
+    </p>
+
+  </header>
+
+  <main>
+
+    <!-- DASHBOARD -->
+    <section class="dashboard">
+
+      <div class="card">
+        <h2>Total</h2>
+        <span id="totalGeral">
+          R$ 0,00
+        </span>
+      </div>
+
+      <div class="card">
+        <h2>PIX</h2>
+        <span id="totalPix">
+          R$ 0,00
+        </span>
+      </div>
+
+      <div class="card">
+        <h2>Dinheiro</h2>
+        <span id="totalDinheiro">
+          R$ 0,00
+        </span>
+      </div>
+
+      <div class="card">
+        <h2>Débito</h2>
+        <span id="totalDebito">
+          R$ 0,00
+        </span>
+      </div>
+
+      <div class="card">
+        <h2>Crédito</h2>
+        <span id="totalCredito">
+          R$ 0,00
+        </span>
+      </div>
+
+    </section>
+
+    <!-- FORMULÁRIO -->
+    <section class="formulario">
+
+      <input
+        type="number"
+        id="valor"
+        placeholder="Valor da venda"
+      >
+
+      <select id="pagamento">
+
+        <option value="PIX">
+          PIX
+        </option>
+
+        <option value="Dinheiro">
+          Dinheiro
+        </option>
+
+        <option value="Débito">
+          Débito
+        </option>
+
+        <option value="Crédito">
+          Crédito
+        </option>
+
+      </select>
+
+      <select id="funcionario"></select>
+
+      <input
+        type="text"
+        id="observacao"
+        placeholder="Observação"
+      >
+
+      <button
+        type="button"
+        onclick="salvarVenda()"
+      >
+        Salvar Venda
+      </button>
+
+    </section>
+
+    <!-- FUNCIONÁRIOS -->
+    <section class="funcionarios">
+
+      <h2>
+        Funcionários
+      </h2>
+
+      <div class="funcionario-box">
+
+        <input
+          type="text"
+          id="novoFuncionario"
+          placeholder="Nome do funcionário"
+        >
+
+        <button
+          type="button"
+          onclick="adicionarFuncionario()"
+        >
+          Adicionar
+        </button>
+
+      </div>
+
+      <ul id="listaFuncionarios"></ul>
+
+    </section>
+
+    <!-- VENDAS -->
+    <section class="vendas">
+
+      <div class="topo-vendas">
+
+        <h2>
+          Vendas
+        </h2>
+
+        <button
+          type="button"
+          onclick="gerarPDF()"
+        >
+          Gerar PDF
+        </button>
+
+      </div>
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Valor</th>
+            <th>Pagamento</th>
+            <th>Funcionário</th>
+            <th>Obs</th>
+            <th>Data</th>
+            <th>Ação</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="listaVendas"></tbody>
+
+      </table>
+
+    </section>
+
+  </main>
+
+  <!-- PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+
+if("serviceWorker" in navigator){
+
+  navigator.serviceWorker.register(
+    "./service-worker.js"
+  )
+
+}
+
+</script>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

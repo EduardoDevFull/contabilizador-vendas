@@ -1,0 +1,127 @@
+/* style.css */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial;
+  background:#FFF7ED;
+  padding:20px;
+  color:#333;
+}
+
+header{
+  margin-bottom:30px;
+}
+
+header h1{
+  color:#EA580C;
+  font-size:36px;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card h2{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.card span{
+  font-size:26px;
+  font-weight:bold;
+  color:#EA580C;
+}
+
+.formulario,
+.funcionarios,
+.vendas{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  margin-bottom:25px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.formulario{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+input,
+select,
+button{
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+button{
+  background:#EA580C;
+  color:white;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button:hover{
+  background:#C2410C;
+}
+
+.funcionario-box{
+  display:flex;
+  gap:10px;
+  margin:15px 0;
+}
+
+#listaFuncionarios li{
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+th{
+  background:#EA580C;
+  color:white;
+  padding:12px;
+}
+
+td{
+  padding:12px;
+  border-bottom:1px solid #ddd;
+  text-align:center;
+}
+
+.topo-vendas{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.excluir{
+  background:red;
+  padding:8px 12px;
+}
