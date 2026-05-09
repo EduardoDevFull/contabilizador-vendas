@@ -105,9 +105,12 @@
 
             <input type="text" id="observacao" placeholder="Observação">
 
-            <button type="button" onclick="salvarVenda()">
-                Salvar Venda
-            </button>
+            <button
+  class="btn-primary btn-full"
+  onclick="salvarVenda()"
+>
+  Salvar Venda
+</button>
 
         </section>
 
@@ -122,9 +125,12 @@
 
                 <input type="text" id="novoFuncionario" placeholder="Nome do funcionário">
 
-                <button type="button" onclick="adicionarFuncionario()">
-                    Adicionar
-                </button>
+                <button
+  class="btn-primary btn-auto"
+  onclick="adicionarFuncionario()"
+>
+  Adicionar
+</button>
 
             </div>
 
@@ -141,30 +147,35 @@
                     Vendas
                 </h2>
 
-                <button type="button" onclick="gerarPDF()">
-                    Gerar PDF
-                </button>
+                <button
+  class="btn-primary btn-auto"
+  onclick="gerarPDF()"
+>
+  Gerar PDF
+</button>   
 
             </div>
 
-            <table>
+            <div class="table-wrapper">
+                <table>
 
-                <thead>
+                    <thead>
 
-                    <tr>
-                        <th>Valor</th>
-                        <th>Pagamento</th>
-                        <th>Funcionário</th>
-                        <th>Obs</th>
-                        <th>Data</th>
-                        <th>Ação</th>
-                    </tr>
+                        <tr>
+                            <th>Valor</th>
+                            <th>Pagamento</th>
+                            <th>Funcionário</th>
+                            <th>Obs</th>
+                            <th>Data</th>
+                            <th>Ação</th>
+                        </tr>
 
-                </thead>
+                    </thead>
 
-                <tbody id="listaVendas"></tbody>
+                    <tbody id="listaVendas"></tbody>
 
-            </table>
+                </table>
+            </div>
 
         </section>
 
