@@ -217,7 +217,8 @@ function atualizarDashboard(){
   let pix = 0
   let dinheiro = 0
   let debito = 0
-  let credito = 0
+  let credito = 0 
+  let quantidade = vendas.length
 
   vendas.forEach(venda=>{
 
@@ -260,6 +261,9 @@ function atualizarDashboard(){
   document.getElementById("totalCredito")
     .textContent =
       `R$ ${credito.toFixed(2)}`
+
+      document.getElementById("quantidadeVendas")
+  .textContent = quantidade
 
 }
 
@@ -309,7 +313,7 @@ function gerarPDF(){
 
   ])
 
-  doc.autoTable({
+  doc.autoTable({   
 
     startY: 40,
 
@@ -357,6 +361,7 @@ function gerarPDF(){
   })
 
   // POSIÇÃO FINAL
+  const quantidadeVendas = vendas.length
   let y =
     doc.lastAutoTable.finalY + 20
 
@@ -367,6 +372,7 @@ function gerarPDF(){
     14,
     y
   )
+
 
   y += 10
 
@@ -391,6 +397,14 @@ function gerarPDF(){
     14,
     y
   )
+
+  y += 10
+
+doc.text(
+  `Quantidade de Vendas: ${quantidadeVendas}`,
+  14,
+  y
+)
 
   y += 15
 
