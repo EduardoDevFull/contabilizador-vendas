@@ -105,12 +105,9 @@
 
             <input type="text" id="observacao" placeholder="Observação">
 
-            <button
-  class="btn-primary btn-full"
-  onclick="salvarVenda()"
->
-  Salvar Venda
-</button>
+            <button class="btn-primary btn-full" onclick="salvarVenda()">
+                Salvar Venda
+            </button>
 
         </section>
 
@@ -125,12 +122,9 @@
 
                 <input type="text" id="novoFuncionario" placeholder="Nome do funcionário">
 
-                <button
-  class="btn-primary btn-auto"
-  onclick="adicionarFuncionario()"
->
-  Adicionar
-</button>
+                <button class="btn-primary btn-auto" onclick="adicionarFuncionario()">
+                    Adicionar
+                </button>
 
             </div>
 
@@ -147,12 +141,13 @@
                     Vendas
                 </h2>
 
-                <button
-  class="btn-primary btn-auto"
-  onclick="gerarPDF()"
->
-  Gerar PDF
-</button>   
+                <button class="btn-primary btn-auto" onclick="gerarPDF()">
+                    Gerar PDF
+                </button>
+
+                <button class="btn-primary btn-auto" onclick="fecharCaixa()">
+                    Fechar Caixa
+                </button>
 
             </div>
 
@@ -179,27 +174,36 @@
 
         </section>
 
-    </main>
+        <section class="historico">
 
-    <!-- PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+            <h2>
+                Histórico de Fechamentos
+            </h2>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+            <div id="listaHistorico"></div>
 
-    <script>
+        </section </main>
 
-        if ("serviceWorker" in navigator) {
+        <!-- PDF -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-            navigator.serviceWorker.register(
-                "./service-worker.js"
-            )
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
-        }
+        <script>
 
-    </script>
+            if ("serviceWorker" in navigator) {
 
-    <!-- SCRIPT -->
-    <script src="script.js"></script>
+                navigator.serviceWorker.register(
+                    "./service-worker.js"
+                )
+
+            }
+
+        </script>
+
+        <!-- SCRIPT -->
+        <script src="script.js"></script>
 
 </body>
 

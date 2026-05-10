@@ -1,5 +1,9 @@
 // script.js
 
+
+let historicos =
+  JSON.parse(localStorage.getItem("historicos")) || []
+
 let vendas =
   JSON.parse(localStorage.getItem("vendas")) || []
 
@@ -19,6 +23,11 @@ function salvarLocalStorage(){
     "funcionarios",
     JSON.stringify(funcionarios)
   )
+
+  localStorage.setItem(
+  "historicos",
+  JSON.stringify(historicos)
+)
 
 }
 
@@ -329,6 +338,8 @@ function gerarPDF(){
 
   })
 
+
+
   // TOTAIS
   let totalGeral = 0
   let totalPix = 0
@@ -363,7 +374,7 @@ function gerarPDF(){
   // POSIÇÃO FINAL
   const quantidadeVendas = vendas.length
   let y =
-    doc.lastAutoTable.finalY + 20
+  doc.lastAutoTable.finalY + 20
 
   doc.setFontSize(14)
 
@@ -406,6 +417,46 @@ doc.text(
   y
 )
 
+  const relatorioFuncionarios = {}
+
+vendas.forEach(venda=>{
+
+  const nome = venda.funcionario
+
+  if(!relatorioFuncionarios[nome]){
+    relatorioFuncionarios[nome] = 0
+  }
+
+  relatorioFuncionarios[nome] +=
+    Number(venda.valor)
+
+})
+
+y += 15
+
+doc.setFontSize(16)
+
+doc.text(
+  "Totais por Funcionário",
+  14,
+  y
+)
+
+y += 10
+
+Object.entries(relatorioFuncionarios)
+.forEach(([nome,totalFuncionario])=>{
+
+  doc.text(
+    `${nome}: R$ ${totalFuncionario.toFixed(2)}`,
+    14,
+    y
+  )
+
+  y += 10
+
+})
+
   y += 15
 
   doc.setFontSize(18)
@@ -416,9 +467,149 @@ doc.text(
     y
   )
 
-  doc.save("relatorio-vendas.pdf")
+  const agora = new Date()
+
+const data =
+  agora.toLocaleDateString("pt-BR")
+    .replace(/\//g,"-")
+
+const hora =
+  agora.toLocaleTimeString("pt-BR")
+    .replace(/:/g,"-")
+
+doc.save(
+  `fechamento-${data}-${hora}.pdf`
+)
 
 }
+
+function fecharCaixa(){
+
+  if(vendas.length === 0){
+
+    alert("Nenhuma venda cadastrada")
+
+    return
+
+  }
+
+  const senha = prompt(
+    "Digite a senha do gerente"
+  )
+
+  if(senha !== "d1421"){
+
+    alert("Senha incorreta")
+
+    return
+
+  }
+
+  const confirmar = confirm(
+    "Deseja realmente fechar o caixa?"
+  )
+
+  if(!confirmar){
+    return
+  }
+
+  // GERA PDF
+  gerarPDF()
+
+  // ESPERA O PDF TERMINAR
+  setTimeout(()=>{
+
+    // TOTAL
+    const total = vendas.reduce(
+      (acc,venda)=>
+        acc + Number(venda.valor),
+      0
+    )
+
+    // HISTÓRICO
+    historicos.push({
+
+      
+
+      data:new Date()
+        .toLocaleString("pt-BR"),
+
+      quantidade:vendas.length,
+
+      total:total,
+
+      vendas:[...vendas]
+
+    })
+
+    // MANTÉM APENAS 30 FECHAMENTOS
+if(historicos.length > 30){
+
+  historicos =
+    historicos.slice(-30)
+
+}
+
+    // LIMPA
+    vendas = []
+
+    salvarLocalStorage()
+
+    atualizarTabela()
+
+    atualizarDashboard()
+
+    atualizarHistorico()
+
+    alert(
+      "Caixa fechado com sucesso!"
+    )
+
+  },500)
+
+}
+
+function atualizarHistorico(){
+
+  const lista =
+    document.getElementById("listaHistorico")
+
+  lista.innerHTML = ""
+
+  historicos
+    .slice()
+    .reverse()
+    .forEach((historico)=>{
+
+      const div =
+        document.createElement("div")
+
+      div.classList.add("historico-card")
+
+      div.innerHTML = `
+
+        <h3>
+          ${historico.data}
+        </h3>
+
+        <p>
+          Total: R$ ${Number(historico.total).toFixed(2)}
+        </p>
+
+        <p>
+          Vendas: ${historico.quantidade}
+        </p>
+
+      `
+
+      lista.appendChild(div)
+
+    })
+
+}
+
+
+atualizarHistorico()
 
 carregarFuncionarios()
 
